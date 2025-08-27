@@ -146,7 +146,7 @@ export const Hero = () => {
                 autoPlay
                 className="w-full h-full object-contain"
               >
-                <source src="/angels2/gym-photos/video.mp4" type="video/mp4" />
+                <source src={`${import.meta.env.BASE_URL}gym-photos/video.mp4`} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>

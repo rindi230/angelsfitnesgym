@@ -3,25 +3,25 @@ export const Staff = () => {
     {
       name: "Eurola",
       specialty: "Personal Training & Strength",
-      image: "/angels2/downloads/eurola.jpg",
+      image: `${import.meta.env.BASE_URL}downloads/eurola.jpg`,
       bio: "Former competitive athlete with expertise in high-intensity workouts and functional fitness."
     },
     {
       name: "Elton",
       specialty: "CrossFit & HIIT",
-      image: "/angels2/downloads/elton.jpg",
+      image: `${import.meta.env.BASE_URL}downloads/elton.jpg`,
       bio: "5+ years experience, certified personal trainer specializing in strength training and body transformation."
     },
     {
       name: "Matilda",
       specialty: "Yoga & Pilates",
-      image: "/angels2/downloads/matilda.jpg",
+      image: `${import.meta.env.BASE_URL}downloads/matilda.jpg`,
       bio: "Certified yoga instructor with 8 years of experience in mindfulness and flexibility training."
     },
     {
       name: "Arber",
       specialty: "Martial Arts & Karate",
-      image: "/angels2/downloads/arber.jpg",
+      image: `${import.meta.env.BASE_URL}downloads/arber.jpg`,
       bio: "Black belt instructor with 15 years of martial arts experience and competition background."
     }
   ];

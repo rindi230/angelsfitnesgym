@@ -14,7 +14,7 @@ export const WhoWeAre = () => {
             {/* Main image container with elegant effects */}
             <div className="relative overflow-hidden rounded-2xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.3)] transform transition-all duration-500 group-hover:scale-[1.02] group-hover:shadow-[0_25px_50px_-15px_rgba(220,38,38,0.25)]">
               <img
-                src="/angels2/downloads/angels logo.jpg"
+                src={`${import.meta.env.BASE_URL}downloads/angels logo.jpg`}
                 alt="Angels Fitness Gym Logo"
                 className="w-full h-96 object-cover transition-all duration-500 group-hover:brightness-105 group-hover:contrast-110"
               />
