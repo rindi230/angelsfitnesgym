@@ -125,7 +125,7 @@ export const Classes = () => {
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Fitness Classes</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Join our expert-led classes designed for all fitness levels. Book your spot now!
+             pdhhh. Book your spot now!
             </p>
           </div>
 
