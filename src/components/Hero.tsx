@@ -36,9 +36,9 @@ export const Hero = () => {
       </div>
 
       {/* Stats floating elements */}
-      <div className="absolute top-32 right-20 bg-white/10 backdrop-blur-md rounded-2xl p-4 animate-fade-in hidden lg:block">
+      <div className="absolute top-32 right-20 bg-white/10 backdrop-blur-md rounded-2xl p-4 animate-fade-in animate-float hidden lg:block">
         <div className="flex items-center space-x-2 text-white">
-          <Users className="w-6 h-6 text-red-500" />
+          <Users className="w-6 h-6 text-red-500 animate-pulse-slow" />
           <div>
             <p className="text-2xl font-bold">500+</p>
             <p className="text-sm opacity-80">Active Members</p>
@@ -46,9 +46,9 @@ export const Hero = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-32 left-20 bg-white/10 backdrop-blur-md rounded-2xl p-4 animate-fade-in delay-500 hidden lg:block">
+      <div className="absolute bottom-32 left-20 bg-white/10 backdrop-blur-md rounded-2xl p-4 animate-fade-in animate-float animate-delay-500 hidden lg:block">
         <div className="flex items-center space-x-2 text-white">
-          <Award className="w-6 h-6 text-red-500" />
+          <Award className="w-6 h-6 text-red-500 animate-pulse-slow" />
           <div>
             <p className="text-2xl font-bold">5 Years</p>
             <p className="text-sm opacity-80">Excellence</p>

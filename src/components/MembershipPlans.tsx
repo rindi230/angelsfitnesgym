@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { Crown } from "lucide-react"; // Shtojmë një ikonë të kurorës për theksim
 
 const plans = [
   {
@@ -12,6 +14,7 @@ const plans = [
     price: "$50/mo",
     description: "E mire per pjestaret e rregullt te cilet duan te jene me fleksibel.",
     features: ["Aksess 4 dite ne jave", "Te gjitha mjetet e plaestres te disponueshme", "Raft i personalizuar i disponueshem", ],
+    popular: true // Shtojmë një flamur për të identifikuar planin popullor
   },
   {
     name: "5 Dite/jave",
@@ -24,6 +27,8 @@ const plans = [
 export default function MembershipPlans() {
   const [open, setOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null as null | typeof plans[0]);
+  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
+  const { elementRef: plansRef, isVisible: plansVisible } = useScrollAnimation({ threshold: 0.2 });
 
   const handleJoin = (plan: typeof plans[0]) => {
     setSelectedPlan(plan);
@@ -33,14 +38,38 @@ export default function MembershipPlans() {
   return (
     <section className="py-16 bg-gradient-to-b from-white to-gray-100" id="membership">
       <div className="max-w-5xl mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-4">Planet e regjistrimit</h2>
-        <p className="text-center text-gray-600 mb-10">Zgjidhni planin i cili ju pershtatet me shume</p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {plans.map((plan) => (
+        <div 
+          ref={titleRef as React.RefObject<HTMLDivElement>}
+          className={`text-center mb-10 transition-all duration-1000 ${
+            titleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          <h2 className="text-4xl font-bold mb-4">Planet e regjistrimit</h2>
+          <p className="text-gray-600">Zgjidhni planin i cili ju pershtatet me shume</p>
+        </div>
+        <div 
+          ref={plansRef as React.RefObject<HTMLDivElement>}
+          className={`grid grid-cols-1 md:grid-cols-3 gap-8 transition-all duration-1000 ${
+            plansVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          {plans.map((plan, index) => (
             <div
               key={plan.name}
-              className="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center border border-gray-100 hover:shadow-2xl transition-shadow duration-300"
+              className={`relative bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center border-2 hover-lift transition-all duration-500 animate-delay-${index * 200} ${
+                plan.popular 
+                  ? 'border-red-500 scale-105 shadow-xl z-10' // Theksim i veçantë për planin popullor
+                  : 'border-gray-100'
+              }`}
             >
+              {/* Shiriti "Më i kërkuari" për planin popullor */}
+              {plan.popular && (
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-1 rounded-full text-sm font-semibold flex items-center">
+                  <Crown className="w-4 h-4 mr-1" />
+                  Më i kërkuari
+                </div>
+              )}
+              
               <h3 className="text-2xl font-semibold mb-2 text-gray-800">{plan.name}</h3>
               <div className="text-3xl font-bold text-red-600 mb-2">{plan.price}</div>
               <p className="text-gray-500 mb-4 text-center">{plan.description}</p>
@@ -53,7 +82,11 @@ export default function MembershipPlans() {
                 ))}
               </ul>
               <button
-                className="mt-auto px-6 py-2 bg-red-600 text-white rounded-lg font-semibold shadow hover:bg-red-700 transition-colors hover:scale-105 hover:shadow-2xl"
+                className={`mt-auto px-6 py-2 rounded-lg font-semibold shadow hover:scale-105 hover:shadow-2xl transition-all ${
+                  plan.popular
+                    ? 'bg-red-600 text-white hover:bg-red-700' // Stil i veçantë për butonin e planit popullor
+                    : 'bg-red-600 text-white hover:bg-red-700'
+                }`}
                 onClick={() => handleJoin(plan)}
               >
                 Regjistrohu tani
@@ -91,4 +124,4 @@ export default function MembershipPlans() {
       </div>
     </section>
   );
-} 
+}

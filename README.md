@@ -1,73 +1,73 @@
-# Welcome to your Lovable project
+# Angels Fitness Gym Website
 
-## Project info
+A modern, responsive website for Angels Fitness Gym built with React, TypeScript, and Tailwind CSS.
 
-**URL**: https://lovable.dev/projects/ec175188-c571-4fd9-9d92-1dcb8abf6e6e
+## Features
 
-## How can I edit this code?
+- 🏋️‍♂️ Gym information and services
+- 📸 Photo gallery
+- 👥 Staff profiles
+- ⭐ Customer reviews
+- 📱 Mobile-responsive design
+- 🎨 Modern UI with smooth animations
 
-There are several ways of editing your application.
+## Tech Stack
 
-**Use Lovable**
+- **Frontend**: React 18 + TypeScript
+- **Styling**: Tailwind CSS + shadcn/ui components
+- **Build Tool**: Vite
+- **Deployment**: GitHub Pages
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/ec175188-c571-4fd9-9d92-1dcb8abf6e6e) and start prompting.
+## Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+1. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-**Use your preferred IDE**
+2. **Run development server**
+   ```bash
+   npm run dev
+   ```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+3. **Build for production**
+   ```bash
+   npm run build
+   ```
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+4. **Preview production build**
+   ```bash
+   npm run preview
+   ```
 
-Follow these steps:
+## Deployment
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+The website automatically deploys to GitHub Pages when you push to the `main` branch.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+**Live Site**: https://[your-username].github.io/angels-gym-website/
 
-# Step 3: Install the necessary dependencies.
-npm i
+## Project Structure
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```
+src/
+├── components/     # React components
+├── contexts/      # React contexts
+├── hooks/         # Custom hooks
+├── pages/         # Page components
+└── lib/           # Utility functions
+
+public/
+├── downloads/     # Gym photos
+└── gym-photos/    # Additional images
 ```
 
-**Edit a file directly in GitHub**
+## Contributing
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
 
-**Use GitHub Codespaces**
+## License
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/ec175188-c571-4fd9-9d92-1dcb8abf6e6e) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+This project is private and proprietary to Angels Fitness Gym.

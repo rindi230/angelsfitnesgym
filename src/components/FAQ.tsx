@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ChevronDown, HelpCircle } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const faqs = [
   {
@@ -26,6 +27,8 @@ const faqs = [
 
 export const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
+  const { elementRef: faqRef, isVisible: faqVisible } = useScrollAnimation({ threshold: 0.2 });
 
   const toggle = (idx: number) => {
     setOpenIndex(openIndex === idx ? null : idx);
@@ -36,14 +39,28 @@ export const FAQ = () => {
       {/* Subtle background pattern */}
       <div className="absolute inset-0 pointer-events-none opacity-20" style={{backgroundImage: 'radial-gradient(circle at 20% 20%, #f87171 0.5px, transparent 0.5px), radial-gradient(circle at 80% 80%, #fbbf24 0.5px, transparent 0.5px)', backgroundSize: '40px 40px'}}></div>
       <div className="max-w-3xl mx-auto px-4 relative z-10">
-        <h2 className="text-4xl font-bold text-center text-gray-900 mb-10 drop-shadow-[0_2px_8px_rgba(0,0,0,0.07)]">Pyetjet me te shpeshta</h2>
-        <div className="space-y-4">
+        <h2 
+          ref={titleRef as React.RefObject<HTMLHeadingElement>}
+          className={`text-4xl font-bold text-center text-gray-900 mb-10 drop-shadow-[0_2px_8px_rgba(0,0,0,0.07)] transition-all duration-1000 ${
+            titleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          Pyetjet me te shpeshta
+        </h2>
+        <div 
+          ref={faqRef as React.RefObject<HTMLDivElement>}
+          className={`space-y-4 transition-all duration-1000 ${
+            faqVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           {faqs.map((faq, idx) => {
             const isOpen = openIndex === idx;
             return (
               <div
                 key={idx}
-                className={`rounded-lg shadow-md overflow-hidden border transition-all duration-300 ${isOpen ? 'border-red-500 bg-white/90' : 'border-gray-200 bg-white/70'}`}
+                className={`rounded-lg shadow-md overflow-hidden border transition-all duration-500 animate-delay-${idx * 100} ${
+                  isOpen ? 'border-red-500 bg-white/90' : 'border-gray-200 bg-white/70'
+                }`}
               >
                 <button
                   className="w-full flex justify-between items-center px-6 py-4 text-lg font-medium text-left text-gray-800 focus:outline-none focus:bg-red-50 hover:bg-red-50 transition-colors group"

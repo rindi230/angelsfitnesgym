@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Calendar, Clock, Users, CheckCircle, AlertCircle } from "lucide-react";
 import { BookingModal } from './BookingModal';
@@ -91,27 +90,27 @@ export const Classes = () => {
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case 'Beginner': return 'bg-green-100 text-green-800';
-      case 'Intermediate': return 'bg-yellow-100 text-yellow-800';
-      case 'Advanced': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'Beginner': return 'bg-primary/10 text-primary';
+      case 'Intermediate': return 'bg-secondary/10 text-secondary-foreground';
+      case 'Advanced': return 'bg-destructive/10 text-destructive';
+      default: return 'bg-muted text-muted-foreground';
     }
   };
 
   const getSlotStatus = (slots: number, maxSlots: number) => {
     const percentage = (slots / maxSlots) * 100;
-    if (percentage <= 0) return { color: 'text-red-600', text: 'Full' };
+    if (percentage <= 0) return { color: 'text-destructive', text: 'Full' };
     if (percentage <= 20) return { color: 'text-orange-600', text: 'Almost Full' };
-    return { color: 'text-green-600', text: 'Available' };
+    return { color: 'text-primary', text: 'Available' };
   };
 
   if (isLoading) {
     return (
-      <section id="classes" className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
+      <section id="classes" className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-4 border-red-600 border-t-transparent mx-auto"></div>
-            <p className="mt-4 text-gray-600">Loading classes...</p>
+            <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent mx-auto"></div>
+            <p className="mt-4 text-muted-foreground">Loading classes...</p>
           </div>
         </div>
       </section>
@@ -120,11 +119,11 @@ export const Classes = () => {
 
   return (
     <>
-      <section id="classes" className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
+      <section id="classes" className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Fitness Classes</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold text-foreground mb-4">Fitness Classes</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Join our expert-led classes designed for all fitness levels. Book your spot now!
             </p>
           </div>
@@ -136,7 +135,7 @@ export const Classes = () => {
               return (
                 <div
                   key={classItem.id}
-                  className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                  className="bg-card rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border"
                 >
                   <div className="relative">
                     <img
@@ -149,16 +148,16 @@ export const Classes = () => {
                         {classItem.difficulty}
                       </span>
                     </div>
-                    <div className="absolute bottom-4 right-4 bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">
+                    <div className="absolute bottom-4 right-4 bg-primary/90 text-primary-foreground px-3 py-1 rounded-full text-xs font-semibold">
                       Available
                     </div>
                   </div>
                   
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">{classItem.name}</h3>
-                    <p className="text-red-600 font-semibold mb-3"> {classItem.trainer}</p>
+                    <h3 className="text-xl font-bold text-card-foreground mb-2">{classItem.name}</h3>
+                    <p className="text-primary font-semibold mb-3">{classItem.trainer || 'Professional Trainer'}</p>
                     
-                    <div className="space-y-2 text-sm text-gray-600 mb-4">
+                    <div className="space-y-2 text-sm text-muted-foreground mb-4">
                       <div className="flex items-center space-x-2">
                         <Calendar className="w-4 h-4" />
                         <span>{classItem.schedule_time}</span>
@@ -169,11 +168,11 @@ export const Classes = () => {
                       </div>
                       <div className="flex items-center space-x-2">
                         <Users className="w-4 h-4" />
-                        <span className="text-green-600">Available</span>
+                        <span className="text-primary">Available</span>
                       </div>
                     </div>
                     
-                    <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-4">
                       {classItem.description}
                     </p>
                     
@@ -182,7 +181,7 @@ export const Classes = () => {
                       disabled={status === 'booking' || status === 'booked'}
                       className={`w-full py-3 px-4 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2 ${
                         status === 'booked'
-                          ? 'bg-green-600 text-white'
+                          ? 'bg-red-600 text-white'
                           : status === 'booking'
                           ? 'bg-red-400 text-white cursor-wait'
                           : 'bg-red-600 hover:bg-red-700 text-white hover:shadow-lg transform hover:scale-105'
@@ -190,7 +189,7 @@ export const Classes = () => {
                     >
                       {status === 'booking' && (
                         <>
-                          <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
+                          <div className="animate-spin rounded-full h-4 w-4 border-2 border-primary-foreground border-t-transparent"></div>
                           <span>Booking...</span>
                         </>
                       )}

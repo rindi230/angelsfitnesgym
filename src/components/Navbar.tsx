@@ -17,6 +17,26 @@ export const Navbar = ({ scrollY }: NavbarProps) => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
 
+  const scrollToSection = (sectionId: string) => {
+    try {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const offset = 80; // Account for fixed navbar height
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      } else {
+        console.warn(`Section with id "${sectionId}" not found`);
+      }
+    } catch (error) {
+      console.error('Error scrolling to section:', error);
+    }
+  };
+
   useEffect(() => {
     fetchBookingCount();
     
@@ -59,11 +79,12 @@ export const Navbar = ({ scrollY }: NavbarProps) => {
   };
 
   const navItems = [
-    { name: "Home", href: "#hero" },
+    { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
     { name: "Classes", href: "#classes" },
+    { name: "Staff", href: "#staff" },
+    { name: "Gallery", href: "#gallery" },
     { name: "Shop", href: "#shop" },
-    { name: "Gallery", href: "#gallery" }, // Added Gallery section
     { name: "Contact", href: "#contact" },
   ];
 
@@ -88,17 +109,25 @@ export const Navbar = ({ scrollY }: NavbarProps) => {
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-8">
                 {navItems.map((item) => (
-                  <a
+                  <button
                     key={item.name}
-                    href={item.href}
-                    className={`px-3 py-2 text-sm font-medium transition-colors duration-300 ${
+                    onClick={(e) => {
+                      scrollToSection(item.href.replace('#', ''));
+                      // Add visual feedback
+                      const button = e.target as HTMLElement;
+                      if (button) {
+                        button.classList.add('scale-105');
+                        setTimeout(() => button.classList.remove('scale-105'), 200);
+                      }
+                    }}
+                    className={`px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 ${
                       scrollY > 50
                         ? "text-gray-700 hover:text-red-600"
                         : "text-white hover:text-red-200"
                     }`}
                   >
                     {item.name}
-                  </a>
+                  </button>
                 ))}
               </div>
             </div>
@@ -184,14 +213,16 @@ export const Navbar = ({ scrollY }: NavbarProps) => {
           <div className="md:hidden bg-white/95 backdrop-blur-md shadow-lg">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navItems.map((item) => (
-                <a
+                <button
                   key={item.name}
-                  href={item.href}
-                  className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => {
+                    scrollToSection(item.href.replace('#', ''));
+                    setIsMenuOpen(false);
+                  }}
+                  className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors"
                 >
                   {item.name}
-                </a>
+                </button>
               ))}
               
               <div className="border-t pt-4 mt-4">

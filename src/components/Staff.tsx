@@ -1,4 +1,9 @@
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+
 export const Staff = () => {
+  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
+  const { elementRef: staffRef, isVisible: staffVisible } = useScrollAnimation({ threshold: 0.2 });
+
   const trainers = [
     {
       name: "Eurola",
@@ -29,18 +34,28 @@ export const Staff = () => {
   return (
     <section id="staff" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div 
+          ref={titleRef as React.RefObject<HTMLDivElement>}
+          className={`text-center mb-12 transition-all duration-1000 ${
+            titleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Njifni stafin tone ekspert</h2>
           <p className="text-xl text-gray-600">
           Trajnerët tanë të çertifikuar janë këtu për t'ju ndihmuar të arrini qëllimet tuaja të fitnesit
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div 
+          ref={staffRef as React.RefObject<HTMLDivElement>}
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 transition-all duration-1000 ${
+            staffVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           {trainers.map((trainer, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg shadow-lg overflow-hidden hover-scale transition-all duration-300 animate-fade-in"
+              className={`bg-white rounded-lg shadow-lg overflow-hidden hover-lift transition-all duration-500 animate-delay-${index * 200}`}
             >
               <img
                 src={trainer.image}

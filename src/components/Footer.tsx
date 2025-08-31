@@ -1,12 +1,33 @@
 
 export const Footer = () => {
+  const scrollToSection = (sectionId: string) => {
+    try {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const offset = 80; // Account for fixed navbar height
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      } else {
+        console.warn(`Section with id "${sectionId}" not found`);
+      }
+    } catch (error) {
+      console.error('Error scrolling to section:', error);
+    }
+  };
+
   const quickLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Classes", href: "#classes" },
-    { name: "Staff", href: "#staff" },
-    { name: "Shop", href: "#shop" },
-    { name: "Contact", href: "#contact" }
+    { name: "Home", href: "home" },
+    { name: "About", href: "about" },
+    { name: "Classes", href: "classes" },
+    { name: "Staff", href: "staff" },
+    { name: "Gallery", href: "gallery" },
+    { name: "Shop", href: "shop" },
+    { name: "Contact", href: "contact" }
   ];
 
   const services = [
@@ -39,12 +60,20 @@ export const Footer = () => {
             <ul className="space-y-2">
               {quickLinks.map((link, index) => (
                 <li key={index}>
-                  <a
-                    href={link.href}
-                    className="text-gray-300 hover:text-red-500 transition-colors duration-300"
+                  <button
+                    onClick={(e) => {
+                      scrollToSection(link.href);
+                      // Add visual feedback
+                      const button = e.target as HTMLElement;
+                      if (button) {
+                        button.classList.add('scale-105');
+                        setTimeout(() => button.classList.remove('scale-105'), 200);
+                      }
+                    }}
+                    className="text-gray-300 hover:text-red-500 transition-all duration-300 text-left w-full hover:scale-105"
                   >
                     {link.name}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>

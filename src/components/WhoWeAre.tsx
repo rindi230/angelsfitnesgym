@@ -1,8 +1,19 @@
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+
 export const WhoWeAre = () => {
+  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
+  const { elementRef: imageRef, isVisible: imageVisible } = useScrollAnimation({ threshold: 0.2 });
+  const { elementRef: contentRef, isVisible: contentVisible } = useScrollAnimation({ threshold: 0.3 });
+
   return (
-    <section id="about" className="py-20 bg-gray-50">
+    <section id="about" className="py-12 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div 
+          ref={titleRef as React.RefObject<HTMLDivElement>}
+          className={`text-center mb-12 transition-all duration-1000 ${
+            titleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Kush jemi ne</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Ne Angels Fitness Gym, jemi më shumë se një palester - jemi një komunitet i dedikuar të transformoj jetën tuaj përmes fitnesit dhe shëndetit.
@@ -10,7 +21,12 @@ export const WhoWeAre = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="animate-fade-in relative group">
+          <div 
+            ref={imageRef as React.RefObject<HTMLDivElement>}
+            className={`relative group transition-all duration-1000 ${
+              imageVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+            }`}
+          >
             {/* Main image container with elegant effects */}
             <div className="relative overflow-hidden rounded-2xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.3)] transform transition-all duration-500 group-hover:scale-[1.02] group-hover:shadow-[0_25px_50px_-15px_rgba(220,38,38,0.25)]">
               <img
@@ -53,7 +69,12 @@ export const WhoWeAre = () => {
             </div>
           </div>
           
-          <div className="space-y-6 animate-fade-in">
+          <div 
+            ref={contentRef as React.RefObject<HTMLDivElement>}
+            className={`space-y-6 transition-all duration-1000 ${
+              contentVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+            }`}
+          >
             <div>
               <h3 className="text-2xl font-bold text-gray-900 mb-3">Misioni yne</h3>
               <p className="text-gray-600 leading-relaxed">

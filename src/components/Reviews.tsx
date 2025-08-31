@@ -1,5 +1,10 @@
 
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+
 export const Reviews = () => {
+  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
+  const { elementRef: reviewsRef, isVisible: reviewsVisible } = useScrollAnimation({ threshold: 0.2 });
+
   const reviews = [
     {
       name: "Rory O Brien",
@@ -41,18 +46,28 @@ export const Reviews = () => {
   return (
     <section id="reviews" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div 
+          ref={titleRef as React.RefObject<HTMLDivElement>}
+          className={`text-center mb-12 transition-all duration-1000 ${
+            titleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Cfare thone pjestaret tane</h2>
           <p className="text-xl text-gray-600">
             Historite e thena nga njerezit qe kane transformuar jeten e tyre
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div 
+          ref={reviewsRef as React.RefObject<HTMLDivElement>}
+          className={`grid grid-cols-1 md:grid-cols-2 gap-8 transition-all duration-1000 ${
+            reviewsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           {reviews.map((review, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg shadow-lg p-6 hover-scale transition-all duration-300 animate-fade-in"
+              className={`bg-white rounded-lg shadow-lg p-6 hover-lift transition-all duration-500 animate-delay-${index * 200}`}
             >
               <div className="flex items-center mb-4">
                 <img

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Calculator, Activity, Target, Droplets, Scale, TrendingUp, Zap, Heart } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 // Define the results type
 interface Results {
@@ -33,6 +34,8 @@ interface Results {
 export const Tools = () => {
   const [activeTab, setActiveTab] = useState("bmi");
   const [results, setResults] = useState<Results>({});
+  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
+  const { elementRef: toolsRef, isVisible: toolsVisible } = useScrollAnimation({ threshold: 0.2 });
 
   const calculateBMI = (weight: number, height: number) => {
     const heightInMeters = height / 100;
@@ -128,14 +131,24 @@ export const Tools = () => {
   return (
     <section id="tools" className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div 
+          ref={titleRef as React.RefObject<HTMLDivElement>}
+          className={`text-center mb-12 transition-all duration-1000 ${
+            titleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Kalkulatoret e trupit</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
           Ndiqni udhëtimin tuaj në fitnes me paketën tonë gjithëpërfshirëse të kalkulatorëve të shëndetit dhe fitnesit
           </p>
         </div>
 
-        <div className="max-w-6xl mx-auto">
+        <div 
+          ref={toolsRef as React.RefObject<HTMLDivElement>}
+          className={`max-w-6xl mx-auto transition-all duration-1000 ${
+            toolsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           {/* Tab Navigation */}
           <div className="flex flex-wrap justify-center mb-8 gap-2">
             {tabs.map((tab) => {
