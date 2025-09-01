@@ -91,11 +91,11 @@ export const Shop = () => {
   };
 
   const getTotalItems = () => {
-    return items.reduce((total, item) => total + item.quantity, 0);
+    return items?.reduce((total, item) => total + item.quantity, 0) || 0;
   };
 
   const getTotalPrice = () => {
-    return items.reduce((total, item) => total + (item.price * item.quantity), 0);
+    return items?.reduce((total, item) => total + (item.price * item.quantity), 0) || 0;
   };
 
   if (isLoading) {
@@ -141,7 +141,7 @@ export const Shop = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {products.map((product) => {
-              const cartItem = items.find(item => item.id === product.id);
+              const cartItem = items?.find(item => item.id === product.id);
               
               return (
                 <div
@@ -215,7 +215,7 @@ export const Shop = () => {
               </button>
             </div>
 
-            {items.length === 0 ? (
+            {!items || items.length === 0 ? (
               <div className="text-center py-12">
                 <ShoppingCart className="w-16 h-16 text-muted-foreground/50 mx-auto mb-4" />
                 <p className="text-muted-foreground text-lg">Your cart is empty</p>
@@ -224,7 +224,7 @@ export const Shop = () => {
             ) : (
               <>
                 <div className="space-y-4 mb-6">
-                  {items.map((item) => (
+                  {items?.map((item) => (
                     <div key={item.id} className="flex items-center space-x-4 p-4 bg-muted rounded-lg">
                       <img
                         src={item.image}

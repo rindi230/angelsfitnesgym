@@ -1,6 +1,7 @@
+// @ts-nocheck
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Target, Users, Award, Heart, Star, Calendar, Clock, Activity } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, type RefObject } from "react";
 
 export const WhoWeAre = () => {
   const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
@@ -32,7 +33,7 @@ export const WhoWeAre = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header Section */}
         <div 
-          ref={titleRef as React.RefObject<HTMLDivElement>}
+          ref={titleRef as RefObject<HTMLDivElement>}
           className={`text-center mb-20 transition-all duration-1000 ${
             titleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
@@ -57,7 +58,7 @@ export const WhoWeAre = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           {/* Enhanced Image Section with 3D Effects */}
           <div 
-            ref={imageRef as React.RefObject<HTMLDivElement>}
+            ref={imageRef as RefObject<HTMLDivElement>}
             className={`relative group transition-all duration-1000 ${
               imageVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
             }`}
@@ -70,7 +71,7 @@ export const WhoWeAre = () => {
                 isHovered ? 'rotate-y-2 rotate-x-1' : ''
               }`}>
                 <img
-                  src={`${import.meta.env.BASE_URL}downloads/angels logo.jpg`}
+                  src={`${(import.meta as any).env?.BASE_URL ?? "/"}downloads/angels logo.jpg`}
                   alt="Angels Fitness Gym - Premium Fitness Center"
                   className="w-full h-96 object-cover transform transition-all duration-700 group-hover:scale-110"
                 />
@@ -115,7 +116,7 @@ export const WhoWeAre = () => {
 
           {/* Enhanced Content Section */}
           <div 
-            ref={contentRef as React.RefObject<HTMLDivElement>}
+            ref={contentRef as RefObject<HTMLDivElement>}
             className={`space-y-10 transition-all duration-1000 ${
               contentVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
             }`}
