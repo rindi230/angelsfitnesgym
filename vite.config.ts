@@ -9,7 +9,7 @@ const __dirname = dirname(__filename);
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: mode === 'production' ? "/angelsfitnessgymm/" : "/", // <-- THIS SHOULD MATCH YOUR REPO NAME!n
+  base: mode === 'production' ? "/angelsfitnesgym/" : "/", // <-- THIS SHOULD MATCH YOUR REPO NAME!
   server: {
     host: "::",
     port: 8082,
