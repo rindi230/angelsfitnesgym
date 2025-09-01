@@ -4,10 +4,10 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "/angels-gym-website/", // <-- THIS SHOULD MATCH YOUR REPO NAME!
+  base: mode === 'production' ? "/angelsfitnessgymm/" : "/", // <-- THIS SHOULD MATCH YOUR REPO NAME!
   server: {
     host: "::",
-    port: 8080,
+    port: 8082,
   },
   plugins: [
     react(),
