@@ -122,15 +122,9 @@ export const Classes = () => {
       <section id="classes" className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-<<<<<<< HEAD
             <h2 className="text-4xl font-bold text-foreground mb-4">Fitness Classes</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Join our expert-led classes designed for all fitness levels. Book your spot now!
-=======
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Fitness Classes</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-             . Book your spot now pssss!
->>>>>>> 530abbd29a101630b20253a88b6e60748e8cea48
             </p>
           </div>
 
