@@ -26,10 +26,6 @@ export const Classes = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
 
-  useEffect(() => {
-    fetchClasses();
-  }, [fetchClasses]);
-
   const fetchClasses = useCallback(async () => {
     try {
       const { data, error } = await supabase
@@ -55,6 +51,10 @@ export const Classes = () => {
       setIsLoading(false);
     }
   }, [toast]);
+
+  useEffect(() => {
+    fetchClasses();
+  }, [fetchClasses]);
 
   const handleBookClass = (classId: number, className: string) => {
     setSelectedClass({ id: classId, name: className });

@@ -50,29 +50,6 @@ export const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
   const [activeTab, setActiveTab] = useState<'bookings' | 'classes' | 'orders'>('bookings');
   const { toast } = useToast();
 
-  useEffect(() => {
-    if (isOpen) {
-      fetchBookings();
-      fetchClasses();
-      fetchShopOrders();
-    }
-  }, [isOpen, fetchBookings]);
-
-  useEffect(() => {
-    // Listen for booking updates
-    const handleBookingUpdate = () => {
-      if (isOpen) {
-        fetchBookings();
-      }
-    };
-    
-    window.addEventListener('bookingUpdated', handleBookingUpdate);
-    
-    return () => {
-      window.removeEventListener('bookingUpdated', handleBookingUpdate);
-    };
-  }, [isOpen, fetchBookings]);
-
   const fetchBookings = useCallback(async () => {
     setIsLoading(true);
     try {
@@ -189,6 +166,29 @@ export const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
       console.error('Error fetching booking count:', error);
     }
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      fetchBookings();
+      fetchClasses();
+      fetchShopOrders();
+    }
+  }, [isOpen, fetchBookings]);
+
+  useEffect(() => {
+    // Listen for booking updates
+    const handleBookingUpdate = () => {
+      if (isOpen) {
+        fetchBookings();
+      }
+    };
+    
+    window.addEventListener('bookingUpdated', handleBookingUpdate);
+    
+    return () => {
+      window.removeEventListener('bookingUpdated', handleBookingUpdate);
+    };
+  }, [isOpen, fetchBookings]);
 
   if (!isOpen) return null;
 

@@ -18,10 +18,6 @@ export const Shop = () => {
   const { addItem } = useCart();
   const { toast } = useToast();
 
-  useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
-
   const fetchProducts = useCallback(async () => {
     try {
       const { data, error } = await supabase
@@ -47,6 +43,10 @@ export const Shop = () => {
       setIsLoading(false);
     }
   }, [toast]);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
 
   const handleAddToCart = (product: Product) => {
     if (product.stock_quantity <= 0) {
