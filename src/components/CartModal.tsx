@@ -105,7 +105,6 @@ export const CartModal = ({ isOpen, onClose }: CartModalProps) => {
       setIsProcessing(false);
     }
   };
-
   const handleCheckout = async () => {
     if (!customerEmail.trim()) {
       toast({
@@ -264,37 +263,38 @@ export const CartModal = ({ isOpen, onClose }: CartModalProps) => {
 
         {items.length > 0 && (
           <div className="border-t p-6 flex-shrink-0">
-            <div className="flex items-center justify-between mb-6">
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Email Address (for receipt) *
+              </label>
+              <input
+                type="email"
+                value={customerEmail}
+                onChange={(e) => setCustomerEmail(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                placeholder="Enter your email address"
+                required
+                disabled={isProcessing}
+              />
+            </div>
+            
+            <div className="flex items-center justify-between mb-4">
               <span className="text-xl font-bold text-gray-900">Total:</span>
               <span className="text-2xl font-bold text-red-600">${getTotalPrice().toFixed(2)}</span>
             </div>
             
-            <div className="space-y-4">
-              <div>
-                <Label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                  Email Address *
-                </Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={customerEmail}
-                  onChange={(e) => setCustomerEmail(e.target.value)}
-                  placeholder="Enter your email address"
-                  required
-                  disabled={isProcessing}
-                />
-              </div>
-              
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                <p className="text-blue-800 text-sm">
-                  <strong>Note:</strong> Your order details will be sent to our team and we'll contact you soon to arrange pickup/delivery.
-                </p>
-              </div>
-              
-              <Button
+            <div className="flex space-x-4">
+              <button
+                onClick={clearCart}
+                className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 py-3 rounded-lg font-semibold transition-colors"
+                disabled={isProcessing}
+              >
+                Clear Cart
+              </button>
+              <button
                 onClick={handleOrderSubmit}
                 disabled={isProcessing || !customerEmail.trim()}
-                className="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 flex items-center justify-center space-x-2"
+                className="flex-1 bg-red-600 hover:bg-red-700 text-white py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 flex items-center justify-center space-x-2"
               >
                 {isProcessing ? (
                   <>
@@ -307,16 +307,7 @@ export const CartModal = ({ isOpen, onClose }: CartModalProps) => {
                     <span>Submit Order</span>
                   </>
                 )}
-              </Button>
-              
-              <Button
-                onClick={clearCart}
-                variant="outline"
-                className="w-full"
-                disabled={isProcessing}
-              >
-                Clear Cart
-              </Button>
+              </button>
             </div>
           </div>
         )}

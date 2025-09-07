@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Calendar, Clock, Users, CheckCircle, AlertCircle } from "lucide-react";
 import { BookingModal } from './BookingModal';
 import { supabase } from '@/integrations/supabase/client';
@@ -28,9 +28,9 @@ export const Classes = () => {
 
   useEffect(() => {
     fetchClasses();
-  }, []);
+  }, [fetchClasses]);
 
-  const fetchClasses = async () => {
+  const fetchClasses = useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from('classes')
@@ -54,7 +54,7 @@ export const Classes = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [toast]);
 
   const handleBookClass = (classId: number, className: string) => {
     setSelectedClass({ id: classId, name: className });

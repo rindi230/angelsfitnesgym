@@ -11,6 +11,7 @@ dist/
 build/
 .next/
 out/
+docs/
 
 # Environment variables
 .env
@@ -38,6 +39,7 @@ Thumbs.db
 # Logs
 logs
 *.log
+*.log.*
 
 # Runtime data
 pids
@@ -85,7 +87,6 @@ jspm_packages/
 
 # Nuxt.js build / generate output
 .nuxt
-dist
 
 # Gatsby files
 .cache/
@@ -101,3 +102,24 @@ temp/
 
 # Supabase
 .supabase/
+
+# Vite cache
+.vite/
+
+# TypeScript
+*.tsbuildinfo
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Additional build outputs
+dist-ssr
+*.local

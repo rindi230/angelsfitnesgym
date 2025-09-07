@@ -94,7 +94,6 @@ export const BookingModal = ({ isOpen, onClose, classId, className, onBookingCom
         classId,
         bookingTime: new Date().toLocaleString()
       });
-      
       const { data, error } = await supabase.functions.invoke('send-booking-notification', {
         body: {
           customerName,

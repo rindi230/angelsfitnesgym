@@ -40,7 +40,6 @@ interface MembershipNotificationRequest {
 }
 
 type NotificationRequest = BookingNotificationRequest | ShoppingNotificationRequest | MembershipNotificationRequest;
-
 const handler = async (req: Request): Promise<Response> => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {

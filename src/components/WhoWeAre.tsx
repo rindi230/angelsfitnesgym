@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Target, Users, Award, Heart, Star, Calendar, Clock, Activity } from "lucide-react";
 import { useState, useEffect, type RefObject } from "react";
@@ -187,8 +186,6 @@ export const WhoWeAre = () => {
           </div>
         </div>
       </div>
-
-
     </section>
   );
 };

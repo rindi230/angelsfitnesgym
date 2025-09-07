@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Users, Calendar, Clock, Mail, User, X, Loader2, RefreshCw, ShoppingCart, Package } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
@@ -36,7 +36,6 @@ interface ShopOrder {
   orderTime: string;
   status: string;
 }
-
 interface AdminPanelProps {
   isOpen: boolean;
   onClose: () => void;
@@ -57,7 +56,7 @@ export const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
       fetchClasses();
       fetchShopOrders();
     }
-  }, [isOpen]);
+  }, [isOpen, fetchBookings]);
 
   useEffect(() => {
     // Listen for booking updates
@@ -72,9 +71,9 @@ export const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
     return () => {
       window.removeEventListener('bookingUpdated', handleBookingUpdate);
     };
-  }, [isOpen]);
+  }, [isOpen, fetchBookings]);
 
-  const fetchBookings = async () => {
+  const fetchBookings = useCallback(async () => {
     setIsLoading(true);
     try {
       console.log('Fetching bookings...');
@@ -144,7 +143,7 @@ export const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [toast]);
 
   const fetchClasses = async () => {
     try {
@@ -174,7 +173,6 @@ export const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
       setShopOrders([]);
     }
   };
-
   const fetchBookingCount = async () => {
     try {
       const { count, error } = await supabase

@@ -6,7 +6,7 @@ import { Classes } from "@/components/Classes";
 import { Staff } from "@/components/Staff";
 import { Gallery } from "@/components/Gallery";
 import { Reviews } from "@/components/Reviews";
-import { MembershipPlans } from "@/components/MembershipPlans";
+import MembershipPlans from "@/components/MembershipPlans";
 import { Tools } from "@/components/Tools";
 import { Shop } from "@/components/Shop";
 import { Contact } from "@/components/Contact";

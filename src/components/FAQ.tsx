@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import { ChevronDown, HelpCircle } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
@@ -23,10 +23,10 @@ const faqs = [
     question: "Cfare kerkohet per tu regjistruar ne palester?",
     answer: "Per tu regjistruar tek Angels na nevojitet nje karte identiteti shumen e nevojshme monetare nje numer telefoni dhe disa gjera te tjera te vogla te cilat stafi yne do t'ju perditsoje"
   }
-];
+] as const;
 
 export const FAQ = () => {
-  const [openIndex, setOpenIndex] = React.useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
   const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
   const { elementRef: faqRef, isVisible: faqVisible } = useScrollAnimation({ threshold: 0.2 });
 

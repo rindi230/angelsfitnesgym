@@ -178,37 +178,27 @@ const Auth = () => {
               <input
                 type="text"
                 value={fullName}
-                onChange={(e) => handleNameChange(e.target.value)}
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent ${
-                  errors.fullName ? 'border-red-500' : 'border-gray-300'
-                }`}
+                onChange={(e) => setFullName(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                 placeholder="Enter your full name"
                 required={!isLogin}
               />
-              {errors.fullName && (
-                <p className="mt-1 text-sm text-red-600">{errors.fullName}</p>
-              )}
             </div>
           )}
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               <Mail className="w-4 h-4 inline mr-2" />
-              Gmail Address
+              Email Address
             </label>
             <input
               type="email"
               value={email}
-              onChange={(e) => handleEmailChange(e.target.value)}
-              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent ${
-                errors.email ? 'border-red-500' : 'border-gray-300'
-              }`}
-              placeholder="Enter your Gmail address (example@gmail.com)"
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+              placeholder="Enter your email"
               required
             />
-            {errors.email && (
-              <p className="mt-1 text-sm text-red-600">{errors.email}</p>
-            )}
           </div>
 
           <div>
@@ -219,22 +209,17 @@ const Auth = () => {
             <input
               type="password"
               value={password}
-              onChange={(e) => handlePasswordChange(e.target.value)}
-              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent ${
-                errors.password ? 'border-red-500' : 'border-gray-300'
-              }`}
-              placeholder="Enter your password (min 6 characters)"
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+              placeholder="Enter your password"
               required
               minLength={6}
             />
-            {errors.password && (
-              <p className="mt-1 text-sm text-red-600">{errors.password}</p>
-            )}
           </div>
 
           <button
             type="submit"
-            disabled={isLoading || !email.trim() || !password.trim() || (!isLogin && !fullName.trim()) || Object.keys(errors).length > 0}
+            disabled={isLoading}
             className="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 flex items-center justify-center space-x-2"
           >
             {isLoading ? (
